@@ -2,6 +2,7 @@
 Simple Telegram Bridge is a minimalist application designed to bridge the gap between your systems and Telegram. 
 It allows you to automatically register users via a Telegram bot using their phone numbers. 
 It also provides a convenient POST endpoint for sending notifications.
+It use PostgreSQL database for storing users, phones and messages.
 
 ## Prerequisites
 Before you begin, ensure you have met the following requirements:
@@ -30,6 +31,12 @@ DATABASE_URL=postgres://user:password@localhost:5432/TelegramBridge
 npm run start
 ```
 Your Telegram Bridge should now be up and running!
+6. Add you bot token to the database table Bots
+```
+INSERT INTO public."Bots"(token, "lastMessageId", "createdAt", "updatedAt")
+	VALUES (token, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP); 
+```
+
 ## Usage
 To register users, they should initiate a conversation with your Telegram bot. The bot will automatically register their phone number.
 To send notifications to a registered user, use the /notify/sendMessage endpoint.
